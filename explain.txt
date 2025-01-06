@@ -1,0 +1,35 @@
+This code is for facial recognition using a Raspberry Pi camera or a webcam. It integrates with a pre-trained face detector, facial embedding model, and a face recognizer to identify faces and retrieve associated roll numbers from a CSV file.
+
+
+Flatten Function:
+
+A utility function flatten is defined to handle nested lists and convert them into a single flat list.
+File Paths:
+
+embeddingFile: Path to the embeddings file.
+embeddingModel: Path to the pre-trained facial embedding model (openface_nn4.small2.v1.t7).
+recognizerFile: Path to the trained face recognizer.
+labelEncFile: Path to the label encoder for face names.
+Loading Models:
+
+A pre-trained face detection model (res10_300x300_ssd_iter_140000.caffemodel) is loaded using OpenCV's dnn module.
+A pre-trained embedding model (openface_nn4.small2.v1.t7) is loaded using Torch via OpenCV.
+Reading Recognizer and Label Encoder:
+
+The face recognizer and label encoder are read from pickle files to be used for predicting face identity.
+Camera Setup:
+
+A video stream is started from the webcam (or Pi camera) using OpenCV's VideoCapture.
+Face Detection and Recognition Loop:
+
+The video stream is continuously read frame by frame.
+Each frame is resized, and a blob is created to detect faces using the pre-trained detector model.
+Detected faces are processed for embeddings, and those embeddings are passed to the recognizer for identity prediction.
+The name and associated roll number are retrieved from a CSV file.
+Displaying Results:
+
+A rectangle is drawn around detected faces, and the name, roll number, and confidence score are displayed on the video stream.
+The results are updated in real-time as new faces are detected.
+Exit Condition:
+
+The loop breaks when the "Esc" key is pressed, releasing the camera and closing any OpenCV windows.
